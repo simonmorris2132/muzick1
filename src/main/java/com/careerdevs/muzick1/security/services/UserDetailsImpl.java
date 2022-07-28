@@ -9,10 +9,11 @@ import java.util.stream.Collectors;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class UserDetailsImpl {
+public class UserDetailsImpl implements UserDetails {
     
     private static final long serialVersionUID = 1L;
 
@@ -70,6 +71,7 @@ public class UserDetailsImpl {
         this.authorities = authorities;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -84,6 +86,30 @@ public class UserDetailsImpl {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, authorities);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return true;
     }
 
 

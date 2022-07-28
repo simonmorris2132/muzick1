@@ -1,11 +1,18 @@
 package com.careerdevs.muzick1.security.jwt;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import com.careerdevs.muzick1.security.services.UserDetailsImpl;
+
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtils {
@@ -26,6 +33,15 @@ public class JwtUtils {
             logger.error("Error {}", e.getMessage());
         }
         return false;
+    }
+
+    public String generateJwtToken(Authentication authentication) {
+        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        return Jwts.builder().setSubject(userPrincipal.getUsername()).setIssuedAt(new Date()).signWith(SignatureAlgorithm.ES512, jwtSecret).compact();//.setExpiration(new Date().getTime() + jwtExpirationMs)
+    }
+
+    public String getUsernameFromJwtToken(String token) {
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
 }
