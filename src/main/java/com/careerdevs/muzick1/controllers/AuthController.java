@@ -97,12 +97,12 @@ public class AuthController {
                     
                     case "mod":
                     case "moderator":
-                        Role userRole = roleRepo.findByName(ERole.ROLE_MOD).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+                        Role userRoles1 = roleRepo.findByName(ERole.ROLE_MOD).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
                         roles.add(modRole);
                         break;
                     
                     default:
-                        Role userRole = roleRepo.findByName(ERole.ROLE_USER).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+                        Role userRoles2 = roleRepo.findByName(ERole.ROLE_USER).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
                         roles.add(userRole);
                     break;
                 }
