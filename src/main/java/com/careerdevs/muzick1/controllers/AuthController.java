@@ -91,18 +91,18 @@ public class AuthController {
                 switch (role) {
                     case "admin":
                     case "administrator":
-                        Role userRole = roleRepo.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+                        Role adminRole = roleRepo.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
                         roles.add(adminRole);
                     break;
                     
                     case "mod":
                     case "moderator":
-                        Role userRoles1 = roleRepo.findByName(ERole.ROLE_MOD).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+                        Role modRole = roleRepo.findByName(ERole.ROLE_MOD).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
                         roles.add(modRole);
                         break;
                     
                     default:
-                        Role userRoles2 = roleRepo.findByName(ERole.ROLE_USER).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+                        Role userRole= roleRepo.findByName(ERole.ROLE_USER).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
                         roles.add(userRole);
                     break;
                 }
