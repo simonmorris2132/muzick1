@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.careerdevs.muzick1.models.Listener;
 import com.careerdevs.muzick1.models.Note;
+import com.careerdevs.muzick1.models.User;
 import com.careerdevs.muzick1.repos.ListenerRepo;
 import com.careerdevs.muzick1.repos.NoteRepo;
+import com.careerdevs.muzick1.services.UserService;
 
 @CrossOrigin
 @RestController
@@ -28,14 +30,24 @@ public class NoteController {
     @Autowired
     private ListenerRepo listenerRepo;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/test")
     public ResponseEntity<?> testRoute() {
         return new ResponseEntity<>("note route", HttpStatus.OK);
     }
 
-    @PostMapping("/{listenerId}")
-    public ResponseEntity<?> createNote(@PathVariable Long listenerId, @RequestBody Note newNote) {
-        Listener listener = listenerRepo.findById(listenerId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    @PostMapping("/")
+    public ResponseEntity<?> createNote(@RequestBody Note newNote) {
+        
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+        
+        Listener listener = listenerRepo.findUserById(currentUser.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         newNote.setListener(listener);
 

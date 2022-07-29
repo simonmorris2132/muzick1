@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.careerdevs.muzick1.models.Listener;
+import com.careerdevs.muzick1.models.User;
 import com.careerdevs.muzick1.repos.ListenerRepo;
+import com.careerdevs.muzick1.services.UserService;
 
 @CrossOrigin
 @RestController
@@ -22,6 +26,9 @@ public class ListenerController {
     @Autowired
     private ListenerRepo repo;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/test")
     public ResponseEntity<String> rootRoute() {
        return new ResponseEntity<>("Okay", HttpStatus.OK);
@@ -29,6 +36,15 @@ public class ListenerController {
 
     @PostMapping("/")
     public ResponseEntity<?> createListener(@RequestBody Listener newListener) {
+        
+        User currentUser = userService.getCurrentUser();
+
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+
+        newListener.setUser(currentUser);
+
         Listener listener = repo.save(newListener);
 
         return new ResponseEntity<>(listener, HttpStatus.CREATED);

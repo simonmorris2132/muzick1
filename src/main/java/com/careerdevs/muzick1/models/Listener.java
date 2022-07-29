@@ -27,10 +27,11 @@ public class Listener {
 
     }
 
-    public Listener(Long id, String name, Integer age) {
+    public Listener(Long id, String name, Integer age, User user) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.user = user;
     }
 
     public Long getId() {
@@ -55,6 +56,10 @@ public class Listener {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
