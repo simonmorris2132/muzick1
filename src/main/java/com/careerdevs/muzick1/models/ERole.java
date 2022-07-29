@@ -1,11 +1,6 @@
 package com.careerdevs.muzick1.models;
 
-public class ERole {
-
-    public String name() {
-        return name();
-    }
-    
+public enum ERole {
     ROLE_USER,
     ROLE_MOD,
     ROLE_ADMIN;
