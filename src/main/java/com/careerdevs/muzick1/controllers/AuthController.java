@@ -79,9 +79,9 @@ public class AuthController {
 
         User user = new User(signUpRequest.getUsername(), encoder.encode(signUpRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRoles();
-
         Set<Role> = new HashSet<>();
+
+        Set<String> strRoles = signUpRequest.getRoles();
 
         if (strRoles == null) {
             Role userRole = roleRepo.findByName(ERole.ROLE_USER).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
