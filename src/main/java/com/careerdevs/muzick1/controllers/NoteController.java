@@ -30,7 +30,6 @@ public class NoteController {
     @Autowired
     private ListenerRepo listenerRepo;
 
-    @Autowired
     private UserService userService;
 
     @GetMapping("/test")

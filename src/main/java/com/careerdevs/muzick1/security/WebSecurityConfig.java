@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import org.springframework.security.web.SecurityFilterChain;
 import com.careerdevs.muzick1.security.jwt.AuthEntryPointJwt;
 import com.careerdevs.muzick1.security.jwt.AuthTokenFilter;
 import com.careerdevs.muzick1.security.services.UserDetailServiceImple;

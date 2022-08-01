@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
 @Table(
     name = "users",
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = "usernames")
+        @UniqueConstraint(columnNames = "username")
     }
 )
 public class User {

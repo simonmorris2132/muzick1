@@ -26,7 +26,6 @@ public class ListenerController {
     @Autowired
     private ListenerRepo repo;
 
-    @Autowired
     private UserService userService;
 
     @GetMapping("/test")
