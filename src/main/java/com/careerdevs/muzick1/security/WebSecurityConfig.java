@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthEntryPointJwt authEntryPointJwt;
 
     @Bean
-    public AuthTokenFilter authTokenFilter() {
+    AuthTokenFilter authTokenFilter() {
         return new AuthTokenFilter();
     }
 
