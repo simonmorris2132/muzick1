@@ -36,12 +36,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers("/api/auth/**").permitAll().and().authorizeRequests().antMatchers("/api/news/**").permitAll().anyRequest().authenticated();
+        
         http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
 
+        return http.build();
+    }
 
 
 }
