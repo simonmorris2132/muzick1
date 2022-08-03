@@ -53,7 +53,7 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @PostMapping("/signup")
+    @PostMapping("/signin")
     public ResponseEntity<JwtResponse> authentication(@RequestBody LogInRequest logInRequest) {
         Authentication auth = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(logInRequest.getUsername(), logInRequest.getPassword())
