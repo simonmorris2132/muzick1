@@ -102,7 +102,7 @@ public class AuthController {
                     case "moderator":
                         Role modRole = roleRepo.findByName(ERole.ROLE_MOD).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
                         roles.add(modRole);
-                        break;
+                    break;
                     
                     default:
                         Role userRole= roleRepo.findByName(ERole.ROLE_USER).orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
@@ -116,7 +116,7 @@ public class AuthController {
         userRepo.save(user);
 
         return new ResponseEntity<>(new Message("User Created"), HttpStatus.CREATED);
-        
+
     }
 
 }
