@@ -116,6 +116,7 @@ public class AuthController {
         userRepo.save(user);
 
         return new ResponseEntity<>(new Message("User Created"), HttpStatus.CREATED);
+        
     }
 
 }
