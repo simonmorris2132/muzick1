@@ -8,6 +8,10 @@ public class SignUpRequest {
     private String password;
     private Set<String> roles;
 
+    public SignUpRequest() {
+        
+    }
+
     public SignUpRequest(String username, String password, Set<String> roles) {
         this.username = username;
         this.password = password;

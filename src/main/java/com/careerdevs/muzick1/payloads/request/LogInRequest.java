@@ -5,6 +5,9 @@ public class LogInRequest {
     private String username;
     private String password;
 
+    public LogInRequest() {
+    }
+
     public LogInRequest(String username, String password) {
         this.username = username;
         this.password = password;
